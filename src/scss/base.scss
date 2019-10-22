@@ -77,3 +77,22 @@ p {
 section {
   margin: 1.5rem 0;
 }
+
+button {
+  border: 0;
+  background: none;
+  outline: none;
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 70rem;
+  height: 100%;
+  @include backgroundImage('../img/frame.png', contain)
+}

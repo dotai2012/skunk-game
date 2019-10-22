@@ -1,6 +1,8 @@
 $rotate: rotate(-10deg);
 
 .sign-play {
+  display: none;
+
   position: absolute;
   bottom: 0;
 
@@ -11,7 +13,6 @@ $rotate: rotate(-10deg);
     left: 12rem;
     top: 10rem;
     z-index: 1;
-    @extend %buttonFormat;
   }
 
   img {
@@ -21,7 +22,6 @@ $rotate: rotate(-10deg);
 
 .sign-button {
   @include backgroundImage('../img/sign-button.png', contain);
-  @extend %buttonFormat;
   display: flex;
   justify-content: center;
   font-size: 3.5rem;
