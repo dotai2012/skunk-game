@@ -1,12 +1,21 @@
+@mixin skunk-desktop {
+  .skunk {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    img {
+      width: 25rem;
+    }
+  }
+}
+
 .skunk {
   display: none;
 
-  position: absolute;
-  bottom: 0;
-  right: 0;
-
   img {
-    width: 35rem;
+    width: 20rem;
     transform: scaleX(-1);
   }
 }

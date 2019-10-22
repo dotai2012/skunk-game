@@ -1,7 +1,7 @@
 const rounds = {
   round1: {
-    p1: [],
-    p2: [],
+    p1: [1, 5, 6],
+    p2: [2, 6],
   },
   round2: {
     p1: [],
