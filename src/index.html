@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Skunk Game - Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+  <!-- Select no. of player modals -->
+  <div id="select-players-modal" class="modal">
+    <div class="modal-content">
+      <button class="sign-button player" data-player="1">1 Player</button>
+      <button class="sign-button player" data-player="2">2 Players</button>
+    </div>
+  </div>
+
+  <main>
+    <section class="board animated bounceInDown delay-1s">
+      <h1>Let's play Skunk</h1>
+      <div class="table">
+        <span>S</span>
+        <span>K</span>
+        <span>U</span>
+        <span>N</span>
+        <span>K</span>
+      </div>
+    </section>
+    <section class="player-control">
+      <div class="player-1">
+        <button class="sign-button" data-player="1" data-action="roll">Roll</button>
+        <button class="sign-button" data-player="1" data-action="stand">Stand</button>
+        <button class="sign-button" data-player="1" data-action="sit">Sit</button>
+      </div>
+
+      <div class="player-2">
+        <button class="sign-button" data-player="2" data-action="roll">Roll</button>
+        <button class="sign-button" data-player="2" data-action="stand">Stand</button>
+        <button class="sign-button" data-player="2" data-action="sit">Sit</button>
+      </div>
+    </section>
+    <section class="skunk animated fadeInRight delay-2s">
+      <img src="./img/skunk.png">
+    </section>
+    <section class="sign-play animated fadeInLeft">
+      <button>Play</button>
+      <img src="./img/sign-play.png">
+    </section>
+  </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+  <script src="./js/index.js"></script>
+</body>
+
+</html>

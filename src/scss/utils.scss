@@ -1,0 +1,15 @@
+@mixin backgroundImage($url, $size) {
+  background-image: url($url);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: $size;
+}
+
+%buttonFormat {
+  border: 0;
+  background: none;
+  outline: none;
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+}

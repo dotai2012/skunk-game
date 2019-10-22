@@ -1,0 +1,13 @@
+{
+  "name": "skunk",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "node-sass src/scss/index.scss src/css/index.css",
+    "watch": "node-sass -w src/scss/index.scss src/css/index.css"
+  },
+  "dependencies": {
+    "node-sass": "^4.12.0"
+  }
+}
