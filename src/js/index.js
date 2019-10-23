@@ -1,6 +1,6 @@
 const rounds = {
   round1: {
-    p1: [1, 5, 6],
+    p1: [1, 5, 6, 5, 6, 4, 3, 6, 7, 9, 10],
     p2: [2, 6],
   },
   round2: {
@@ -21,15 +21,48 @@ const rounds = {
   },
 };
 
+// Display score to the table
+const displayTableScore = () => {
+  Object.keys(rounds).map((round) => {
+    const player1 = rounds[round].p1;
+    const player2 = rounds[round].p2;
+    const loopLength = player1.length > player2.length ? player1.length : player2.length;
+
+    const tableData = [];
+    for (let index = 0; index < loopLength; index++) {
+      const rowData = { p1: player1[index] || 0, p2: player2[index] || 0 };
+      tableData.push(rowData);
+    }
+
+    let tableHTML = '';
+    tableData.map((row) => {
+      tableHTML += '<tr>';
+      Object.keys(row).map((player) => {
+        if (row[player] !== 0) {
+          tableHTML += `<td>${row[player]}</td>`;
+        }
+      });
+      tableHTML += '</tr>';
+    });
+
+    $(`#${round}`).html(tableHTML);
+  });
+};
+
+// Get the round score
+const roundScore = (player, round) => {
+  const playerKey = player === 1 ? 'p1' : 'p2';
+  const score = rounds[round][playerKey].reduce((accumulator, value) => accumulator + value, 0);
+  return score;
+};
+
 // Get the total score
 const totalScore = (player) => {
-  const playerKey = player === 1 ? 'p1' : 'p2';
-  const score = Object.keys(rounds).reduce((totalAccumulator, round) => {
-    console.log(round);
-    const roundScore = rounds[round][playerKey].reduce((accumulator, value) => accumulator + value, 0);
-    return totalAccumulator + roundScore;
+  const total = Object.keys(rounds).reduce((totalAccumulator, round) => {
+    const score = roundScore(player, round);
+    return totalAccumulator + score;
   }, 0);
-  return score;
+  return total;
 };
 
 // Roll dice
@@ -58,7 +91,7 @@ $(document).ready(() => {
     $('#select-players-modal').modal();
   });
 
-  $('.player').click(function () {
+  $('.player').click(() => {
     const player = $(this).data('player');
     onPlay(player);
 

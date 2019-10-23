@@ -36,6 +36,7 @@ $rotate: rotate(-10deg);
   font-size: 2.5rem;
   width: 15rem;
   height: 5rem;
+  margin: 1.5rem
 }
 
 .sign-play {
@@ -44,12 +45,6 @@ $rotate: rotate(-10deg);
 
   button {
     @extend .sign-button;
-    // transform: $rotate;
-    // font-size: 3.5rem;
-    // position: absolute;
-    // left: 12rem;
-    // top: 10rem;
-    // z-index: 1;
   }
 
   img {
