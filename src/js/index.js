@@ -59,7 +59,13 @@ const checkRound = (condition) => {
       isP1Playing = true;
       isP2Playing = true;
     } else {
-      $('#show-winner .modal-content').html(`<p>Score Player 1: ${totalScore(1)}</p><p>Score Player 2: ${totalScore(2)}</p>`);
+      const player1Score = totalScore(1);
+      const player2Score = totalScore(2);
+
+      $('#show-winner .modal-content .winner').html(`<p>Score Player 1: ${player1Score}</p>
+      <p>Score Player 2: ${player2Score}</p>
+      <h2>The winner is Player ${player1Score > player2Score ? 1 : 2}</h2>
+      `);
       $('#show-winner').modal();
     }
   }
@@ -130,10 +136,10 @@ const onPlay = (numberOfPlayer) => {
   $('.player-control').css('display', 'flex');
 
   if (numberOfPlayer === 1) {
-    $('#player-1').show().addClass('animated bounceIn');
+    $('#stop-player-1').show().addClass('animated bounceIn');
   } else if (numberOfPlayer === 2) {
-    $('#player-1').show().addClass('animated bounceIn');
-    $('#player-2').show().addClass('animated bounceIn');
+    $('#stop-player-1').show().addClass('animated bounceIn');
+    $('#stop-player-2').show().addClass('animated bounceIn');
   }
 
   $('#roll').click(() => {
@@ -171,7 +177,10 @@ const onRestart = () => {
 };
 
 $('#show-winner').on($.modal.BEFORE_CLOSE, onRestart);
-
+$('.play-again').click(() => {
+  $.modal.close();
+  onRestart();
+});
 
 $(document).ready(() => {
   $('.sign-play button').click(() => {

@@ -2,5 +2,10 @@
   position: absolute;
   display: none;
   bottom: -2rem;
+
+  #stop-player-1,
+  #stop-player-2 {
+    display: none;
+  }
 }
 
