@@ -1,3 +1,15 @@
+// Toasty options
+const toast = new Toasty({
+  enableSounds: true,
+  sounds: {
+    info: './sounds/info/1.mp3',
+    success: './sounds/success/1.mp3',
+    warning: './sounds/warning/1.mp3',
+    error: './sounds/error/1.mp3',
+  },
+});
+
+// Modal options
 $.modal.defaults = {
   escapeClose: false, // Allows the user to close the modal by pressing `ESC`
   clickClose: false, // Allows the user to close the modal by clicking the overlay
@@ -8,6 +20,7 @@ $.modal.defaults = {
 
 let isP1Playing = true;
 let isP2Playing = true;
+let isPlayWithBot = false;
 
 let currentRound = 1;
 
@@ -58,7 +71,16 @@ const checkRound = (condition) => {
       currentRound += 1;
       isP1Playing = true;
       isP2Playing = true;
+
+      if (isPlayWithBot) {
+        $('#stop-player-1').show();
+      } else {
+        $('#stop-player-1').show();
+        $('#stop-player-2').show();
+      }
     } else {
+      (new Audio('./sounds/success/2.mp3')).play();
+
       const player1Score = totalScore(1);
       const player2Score = totalScore(2);
 
@@ -114,6 +136,18 @@ const onRoll = () => {
   const { dice1, dice2 } = randomDice(1, 10);
   const sum = dice1 !== 1 && dice2 !== 1 ? dice1 + dice2 : 0;
 
+  // Simple AI for the bot
+  if (isPlayWithBot) {
+    const currentRoundScoreP1 = roundScore(1, `round${currentRound}`);
+    const currentRoundScoreP2 = roundScore(2, `round${currentRound}`);
+
+    if (currentRoundScoreP2 > currentRoundScoreP1) {
+      isP2Playing = false;
+
+      toast.info('The bot choose to stop this round');
+    }
+  }
+
   if (isP1Playing) {
     rounds[`round${currentRound}`].p1.push(sum);
   }
@@ -122,7 +156,7 @@ const onRoll = () => {
     rounds[`round${currentRound}`].p2.push(sum);
   }
 
-  const isHaveDiceOnePoint = dice1 === 1 || dice2 === 1;
+  const isHaveDiceOnePoint = dice1 === 1 || dice2 === 1 || (!isP1Playing && !isP2Playing);
 
   checkRound(isHaveDiceOnePoint);
 
@@ -136,32 +170,52 @@ const onPlay = (numberOfPlayer) => {
   $('.player-control').css('display', 'flex');
 
   if (numberOfPlayer === 1) {
+    isPlayWithBot = true;
     $('#stop-player-1').show().addClass('animated bounceIn');
   } else if (numberOfPlayer === 2) {
     $('#stop-player-1').show().addClass('animated bounceIn');
     $('#stop-player-2').show().addClass('animated bounceIn');
   }
-
-  $('#roll').click(() => {
-    onRoll();
-    displayTableScore();
-  });
-
-  $('#stop-player-1').click(() => {
-    isP1Playing = false;
-    checkRound(!isP1Playing && !isP2Playing);
-  });
-
-  $('#stop-player-2').click(() => {
-    isP2Playing = false;
-    checkRound(!isP1Playing && !isP2Playing);
-  });
 };
+
+// Handle buttons
+$('#roll').click(() => {
+  (new Audio('./sounds/info/1.mp3')).play();
+
+  onRoll();
+  displayTableScore();
+});
+
+$('#stop-player-1').click(function () {
+  (new Audio('./sounds/info/2.mp3')).play();
+
+  $(this).hide();
+
+  isP1Playing = false;
+
+  toast.info('Player 1 choose to stop this round');
+
+  checkRound(!isP1Playing && !isP2Playing);
+});
+
+$('#stop-player-2').click(function () {
+  (new Audio('./sounds/info/2.mp3')).play();
+
+  $(this).hide();
+
+  isP2Playing = false;
+
+  toast.info('Player 2 choose to stop this round');
+
+  checkRound(!isP1Playing && !isP2Playing);
+});
 
 // Restart game
 const onRestart = () => {
   isP1Playing = true;
   isP2Playing = true;
+  isPlayWithBot = false;
+
   currentRound = 1;
 
   Object.keys(rounds).map((round) => {
@@ -172,8 +226,13 @@ const onRestart = () => {
   });
   displayTableScore();
 
+  // Hide dice
+  $('.dice').hide();
   $('#box-1').text('');
   $('#box-2').text('');
+
+  $('.sign-play').show();
+  $('.player-control').hide();
 };
 
 $('#show-winner').on($.modal.BEFORE_CLOSE, onRestart);
@@ -194,5 +253,8 @@ $(document).ready(() => {
     // Hide play button after clicked
     $('.sign-play').hide();
     $.modal.close();
+
+    // Show dice
+    $('.dice').css('display', 'flex');
   });
 });
