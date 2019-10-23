@@ -40,10 +40,21 @@
       td {
         vertical-align: top;
       }
+    }
 
+    tbody,
+    tfoot {
       table {
         width: 100%;
         font-size: 1.5rem;
+      }
+    }
+
+    .total-score {
+      >td {
+        border-top: 2px solid $text-color-black;
+        position: relative;
+        top: 1.5rem;
       }
     }
   }

@@ -1,0 +1,18 @@
+.dice {
+  position: absolute;
+  bottom: -8rem;
+  display: flex;
+
+  div {
+    margin: 1.5rem;
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.5rem;
+    border: 2px solid rgb(109, 53, 0);
+    background-color: white;
+    color: $text-color-black;
+  }
+}
