@@ -9,10 +9,12 @@ html {
   font-family: 'Turok', sans-serif;
   color: $text-color;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 html,
 body {
+  height: 100vh;
   width: 100vw;
   position: relative;
 }
