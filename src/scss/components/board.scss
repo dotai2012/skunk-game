@@ -1,67 +1,75 @@
 .board {
-  position: absolute;
-  top: 4rem;
+  @include backgroundImage('../img/frame.png', contain);
+  height: 75rem;
+  width: 100%;
+  min-width: 67rem;
 
-  .table {
-    color: $text-color-black;
+  .content {
     position: relative;
-    top: 4rem;
-    text-align: center;
+    top: 10%;
 
-    >thead {
-      tr {
-        th {
-          position: relative;
-          font-size: 2.5rem;
-          padding: 0 2rem;
-
-          &:before {
-            content: '';
-            left: 0;
-            position: absolute;
-            width: 2px;
-            height: 1200%;
-            background: $text-color-black;
-          }
-
-          &:last-child:after {
-            content: '';
-            right: 0;
-            position: absolute;
-            width: 2px;
-            height: 1200%;
-            background: $text-color-black;
+    .table {
+      color: $text-color-black;
+      text-align: center;
+      margin: 0 auto;
+      position: relative;
+      top: 5rem;
+      width: 35rem;
+  
+      >thead {
+        tr {
+          th {
+            position: relative;
+            font-size: 2.5rem;
+            padding: 0 2rem;
+  
+            &:before {
+              content: '';
+              left: 0;
+              position: absolute;
+              width: 2px;
+              height: 1200%;
+              background: $text-color-black;
+            }
+  
+            &:last-child:after {
+              content: '';
+              right: 0;
+              position: absolute;
+              width: 2px;
+              height: 1200%;
+              background: $text-color-black;
+            }
           }
         }
       }
-    }
-
-    tbody {
-      td {
-        vertical-align: top;
+  
+      tbody {
+        td {
+          vertical-align: top;
+        }
+      }
+  
+      tbody,
+      tfoot {
+        table {
+          width: 100%;
+          font-size: 1.5rem;
+        }
+      }
+  
+      .total-score {
+        >td {
+          border-top: 2px solid $text-color-black;
+          position: relative;
+          top: 1.5rem;
+        }
       }
     }
-
-    tbody,
-    tfoot {
-      table {
-        width: 100%;
-        font-size: 1.5rem;
-      }
+  
+    h1 {
+      font-size: 2rem;
+      position: relative;
     }
-
-    .total-score {
-      >td {
-        border-top: 2px solid $text-color-black;
-        position: relative;
-        top: 1.5rem;
-      }
-    }
-  }
-
-  h1 {
-    font-size: 2rem;
-    left: 0.5rem;
-    position: relative;
   }
 }

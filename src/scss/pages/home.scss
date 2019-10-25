@@ -1,7 +1,7 @@
 .player-control {
-  position: absolute;
+  position: relative;
   display: none;
-  bottom: -2rem;
+  bottom: 0;
 
   #stop-player-1,
   #stop-player-2 {

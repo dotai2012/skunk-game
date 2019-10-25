@@ -107,7 +107,8 @@ const displayTableScore = () => {
     }
 
     let tableHTML = '';
-    tableData.map((row) => {
+    // Slice(-15) mean show last 15 results
+    tableData.slice(-15).map((row) => {
       tableHTML += '<tr>';
       Object.keys(row).map((player) => {
         tableHTML += `<td>${row[player]}</td>`;
@@ -133,8 +134,18 @@ const randomDice = (min, max) => {
 };
 
 const onRoll = () => {
-  const { dice1, dice2 } = randomDice(1, 10);
-  const sum = dice1 !== 1 && dice2 !== 1 ? dice1 + dice2 : 0;
+  const { dice1, dice2 } = randomDice(1, 6);
+  let sum = dice1 + dice2;
+
+  // dice1 = 1 and dice2 not 1
+  // dice1 not 1 and dice2 = 1
+  if(dice1 === 1 || dice2 === 1){
+    if(isP1Playing && isP2Playing){
+      sum = dice1 + dice2;
+    } else {
+      sum = 0;
+    }
+  } 
 
   // Simple AI for the bot
   if (isPlayWithBot) {
@@ -145,6 +156,9 @@ const onRoll = () => {
       isP2Playing = false;
 
       toast.info('The bot choose to stop this round');
+
+      checkRound(!isP1Playing && !isP2Playing);
+      return sum;
     }
   }
 
@@ -156,9 +170,9 @@ const onRoll = () => {
     rounds[`round${currentRound}`].p2.push(sum);
   }
 
-  const isHaveDiceOnePoint = dice1 === 1 || dice2 === 1 || (!isP1Playing && !isP2Playing);
+  const isHaveDiceOnePointAndOnePlayerStop = (dice1 === 1 || dice2 === 1) && (!isP1Playing || !isP2Playing);
 
-  checkRound(isHaveDiceOnePoint);
+  checkRound(isHaveDiceOnePointAndOnePlayerStop);
 
   $('#box-1').text(dice1);
   $('#box-2').text(dice2);
